@@ -56,7 +56,7 @@ export default function Settings({
         </Stack>
         <Stack alignItems="center" width={"100%"}>
           <Stack flexDirection="row" space="$5">
-            <Stack borderBottomWidth="1px" paddingBottom="$2">
+            <Stack borderBottomWidth="2px" paddingBottom="$2">
               <Text style={{ fontFamily: "Jost_400Regular", fontSize: 20 }}>
                 Color
               </Text>
@@ -79,7 +79,7 @@ export default function Settings({
           <Stack
             padding="$4"
             borderColor="black"
-            borderWidth="1px"
+            borderWidth="2px"
             borderRadius={8}
             backgroundColor={selectedColor}
             width={"50%"}
@@ -97,7 +97,7 @@ export default function Settings({
             <Input
               backgroundColor="transparent"
               size="$4"
-              borderWidth={1}
+              borderWidth={2}
               borderColor="black"
               value={selectedColor}
               onChangeText={setSelectedColor}

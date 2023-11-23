@@ -48,7 +48,7 @@ export default function Home() {
         size="$13"
         circular="true"
         backgroundColor={compartment?.color}
-        borderColor="rgba(0, 0, 0, 0.1)"
+        borderColor="rgba(0, 0, 0, 0.6)"
         borderWidth="3px"
         onPress={() => {
           if (activeScent && activeScent?.name === compartment?.name) {
@@ -65,7 +65,7 @@ export default function Home() {
         pressStyle={{
           scale: 0.8,
           backgroundColor: compartment?.color,
-          borderColor: "rgba(0, 0, 0, 0.1)",
+          borderColor: "rgba(0, 0, 0, 0.6)",
           borderWidth: "3px",
         }}
       ></Button>
@@ -73,36 +73,45 @@ export default function Home() {
   };
 
   return (
-    <Stack>
+    <Stack
+      backgroundColor={(currentTab === "home" && activeScent?.color) || "white"}
+      width="100%"
+      height="100%"
+      justifyContent="center"
+      alignItems="center"
+      animation="slow"
+    >
       <Tabs defaultValue="home" value={currentTab} width="100%">
-        <Tabs.Content value="home">
-          <Stack space="$3">
-            <Stack space="$3" flexDirection="row">
-              <ScentButton
-                compartment={compartment1}
-                setCompartment={setCompartment1}
-              />
-              <ScentButton
-                compartment={compartment2}
-                setCompartment={setCompartment2}
-              />
+        <Tabs.Content value="home" width={"100%"} alignItems="center">
+          <Stack space="$7" paddingTop="$10">
+            <Stack space="$3">
+              <Stack space="$3" flexDirection="row">
+                <ScentButton
+                  compartment={compartment1}
+                  setCompartment={setCompartment1}
+                />
+                <ScentButton
+                  compartment={compartment2}
+                  setCompartment={setCompartment2}
+                />
+              </Stack>
+              <Stack space="$3" flexDirection="row">
+                <ScentButton
+                  compartment={compartment3}
+                  setCompartment={setCompartment3}
+                />
+                <ScentButton
+                  compartment={compartment4}
+                  setCompartment={setCompartment4}
+                />
+              </Stack>
             </Stack>
-            <Stack space="$3" flexDirection="row">
-              <ScentButton
-                compartment={compartment3}
-                setCompartment={setCompartment3}
-              />
-              <ScentButton
-                compartment={compartment4}
-                setCompartment={setCompartment4}
-              />
+            <Stack alignItems="center" opacity={activeScent?.name ? 1 : 0}>
+              <Text style={{ fontFamily: "Jost_400Regular", fontSize: 24 }}>
+                {activeScent?.name || "Inactive"}
+              </Text>
             </Stack>
           </Stack>
-          {/* <Stack alignItems="center" transform={"translate(0, 70px)"}>
-            <Text style={{ fontFamily: "Jost_400Regular", fontSize: 24 }}>
-              {activeScent?.name}
-            </Text>
-          </Stack> */}
         </Tabs.Content>
         <Tabs.Content value="settings" width={"100%"}>
           <Settings
