@@ -45,11 +45,11 @@ export default function Home() {
   const ScentButton = ({ compartment, setCompartment }) => {
     return (
       <Button
-        circular="true"
         size="$13"
+        circular="true"
         backgroundColor={compartment?.color}
-        borderWidth="3px"
         borderColor="rgba(0, 0, 0, 0.1)"
+        borderWidth="3px"
         onPress={() => {
           if (activeScent && activeScent?.name === compartment?.name) {
             setActiveScent();
@@ -60,6 +60,13 @@ export default function Home() {
         onLongPress={() => {
           setSelectedCompartment(compartment);
           setCurrentTab("settings");
+        }}
+        animation="bouncy"
+        pressStyle={{
+          scale: 0.8,
+          backgroundColor: compartment?.color,
+          borderColor: "rgba(0, 0, 0, 0.1)",
+          borderWidth: "3px",
         }}
       ></Button>
     );
@@ -91,11 +98,11 @@ export default function Home() {
               />
             </Stack>
           </Stack>
-          <Stack alignItems="center" transform={"translate(0, 70px)"}>
+          {/* <Stack alignItems="center" transform={"translate(0, 70px)"}>
             <Text style={{ fontFamily: "Jost_400Regular", fontSize: 24 }}>
               {activeScent?.name}
             </Text>
-          </Stack>
+          </Stack> */}
         </Tabs.Content>
         <Tabs.Content value="settings" width={"100%"}>
           <Settings

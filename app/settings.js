@@ -89,7 +89,7 @@ export default function Settings({
             alignItems="center"
             width={"100%"}
             flexDirection="row"
-            space="$5"
+            space="$3"
           >
             <Text style={{ fontFamily: "Jost_400Regular", fontSize: 17 }}>
               HEX

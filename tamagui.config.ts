@@ -1,32 +1,35 @@
-// the v2 config imports the css driver on web and react-native on native
-
-// for reanimated: @tamagui/config/v2-reanimated
-
-// for react-native only: @tamagui/config/v2-native
-
 import { config } from "@tamagui/config/v2";
 
-import { createFont, createTamagui } from "tamagui";
+import { createTamagui } from "tamagui";
+import { createAnimations } from "@tamagui/animations-moti";
+
 const tamaguiConfig = createTamagui({
   ...config,
-  // fonts: {
-  //   body: createFont({
-  //     family: "Jost_400Regular, sans-serif",
-  //     size: {
-  //       1: 12,
-  //       2: 14,
-  //       3: 15,
-  //     },
-  //   }),
-  //   heading: createFont({
-  //     family: "Jost_400Regular, sans-serif",
-  //     size: {
-  //       1: 12,
-  //       2: 14,
-  //       3: 15,
-  //     },
-  //   }),
-  // },
+  animations: createAnimations({
+    bouncy: {
+      type: "spring",
+      damping: 9,
+      mass: 0.9,
+      stiffness: 150,
+    },
+    fast: {
+      type: "spring",
+      damping: 20,
+      mass: 1.2,
+      stiffness: 250,
+    },
+    medium: {
+      type: "spring",
+      damping: 10,
+      mass: 0.9,
+      stiffness: 100,
+    },
+    slow: {
+      type: "spring",
+      damping: 20,
+      stiffness: 60,
+    },
+  }),
 });
 // this makes typescript properly type everything based on the config
 
