@@ -18,7 +18,7 @@ export default function Settings({
     setSelectedColor(selectedCompartment?.color);
   }, [selectedCompartment]);
 
-  const onSelectColor = ({ hex }) => {
+  const onSelectColor = ({ hex, rgb }) => {
     setSelectedColor(hex.toUpperCase());
     onChange({
       ...selectedCompartment,

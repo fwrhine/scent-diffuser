@@ -31,9 +31,16 @@ export default function Home() {
     compartment: 4,
   });
 
-  useEffect(() => {
-    console.log(compartment1);
-  }, [compartment1]);
+  function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result
+      ? {
+          r: parseInt(result[1], 16),
+          g: parseInt(result[2], 16),
+          b: parseInt(result[3], 16),
+        }
+      : null;
+  }
 
   const ScentButton = ({ compartment, setCompartment }) => {
     return (
@@ -103,6 +110,8 @@ export default function Home() {
               } else {
                 setCompartment4(e);
               }
+
+              console.log(hexToRgb(e.color));
             }}
             currentTab={currentTab}
             setCurrentTab={setCurrentTab}
