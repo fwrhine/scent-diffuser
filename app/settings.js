@@ -28,7 +28,7 @@ export default function Settings({
 
   return (
     <Stack space="$5" width={"100%"}>
-      <Stack space="$10" margin={45}>
+      <Stack space="$6" margin={45}>
         <Stack space="$6">
           <Stack
             transform="translate(-5px, 0)"
@@ -48,7 +48,7 @@ export default function Settings({
               alignItems="center"
             >
               <H1 style={{ fontFamily: "Jost_400Regular" }}>{name}</H1>
-              <Stack paddingTop="$3">
+              <Stack>
                 <Feather name="edit-3" size={24} color="black" />
               </Stack>
             </Stack>
@@ -66,7 +66,7 @@ export default function Settings({
             </Text>
           </Stack>
         </Stack>
-        <Stack alignItems="center" space="$6">
+        <Stack alignItems="center">
           <ColorPicker
             style={{ width: "70%" }}
             value={selectedColor}
@@ -74,6 +74,8 @@ export default function Settings({
           >
             <Panel3 />
           </ColorPicker>
+        </Stack>
+        <Stack alignItems="center" space="$3">
           <Stack
             padding="$4"
             borderColor="black"
@@ -82,25 +84,25 @@ export default function Settings({
             backgroundColor={selectedColor}
             width={"50%"}
           ></Stack>
-        </Stack>
-        <Stack
-          justifyContent="center"
-          alignItems="center"
-          width={"100%"}
-          flexDirection="row"
-          space="$5"
-        >
-          <Text style={{ fontFamily: "Jost_400Regular", fontSize: 17 }}>
-            HEX
-          </Text>
-          <Input
-            backgroundColor="transparent"
-            size="$4"
-            borderWidth={1}
-            borderColor="black"
-            value={selectedColor}
-            onChangeText={setSelectedColor}
-          />
+          <Stack
+            justifyContent="center"
+            alignItems="center"
+            width={"100%"}
+            flexDirection="row"
+            space="$5"
+          >
+            <Text style={{ fontFamily: "Jost_400Regular", fontSize: 17 }}>
+              HEX
+            </Text>
+            <Input
+              backgroundColor="transparent"
+              size="$4"
+              borderWidth={1}
+              borderColor="black"
+              value={selectedColor}
+              onChangeText={setSelectedColor}
+            />
+          </Stack>
         </Stack>
       </Stack>
     </Stack>

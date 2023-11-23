@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button, Stack, Tabs, Text } from "tamagui";
 import Settings from "./settings";
 
