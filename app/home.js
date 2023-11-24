@@ -10,24 +10,28 @@ export default function Home() {
   const [compartment1, setCompartment1] = useState({
     color: "#F0C4FF",
     name: "Lavender",
+    sound: "Sparkle",
     compartment: 1,
   });
 
   const [compartment2, setCompartment2] = useState({
     color: "#FAE98B",
     name: "Cinnamon",
+    sound: "Wave",
     compartment: 2,
   });
 
   const [compartment3, setCompartment3] = useState({
     color: "#A3D6ED",
     name: "Eucalyptus",
+    sound: "Breeze",
     compartment: 3,
   });
 
   const [compartment4, setCompartment4] = useState({
     color: "#A2E4B8",
     name: "Peppermint",
+    sound: "Wind Chime",
     compartment: 4,
   });
 
