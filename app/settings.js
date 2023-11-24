@@ -52,7 +52,7 @@ export default function Settings({
           </Stack>
           <Stack space="$2">
             <Text style={{ fontFamily: "Jost_400Regular", fontSize: 17 }}>
-              Compartment 1
+              Compartment {selectedCompartment?.compartment}
             </Text>
             <Stack
               justifyContent="space-between"
