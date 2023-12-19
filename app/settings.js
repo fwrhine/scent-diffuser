@@ -1,8 +1,16 @@
-import { H1, Image, Input, Stack, Text } from "tamagui";
+import {
+  H1,
+  Image,
+  Input,
+  Stack,
+  Text,
+  XStack,
+} from "tamagui";
 import { Feather } from "@expo/vector-icons";
 
 import ColorPicker, { Panel3 } from "reanimated-color-picker";
 import { useEffect, useState } from "react";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 export default function Settings({
   selectedCompartment,
@@ -10,13 +18,15 @@ export default function Settings({
   setCurrentTab,
 }) {
   const [currentSettings, setCurrentSettings] = useState("color");
+  const [name, setName] = useState(selectedCompartment?.name);
+
+  // Handle color and sound change
   const [selectedColor, setSelectedColor] = useState(
     selectedCompartment?.color || "#FFFFFF"
   );
   const [selectedSound, setSelectedSound] = useState(
     selectedCompartment?.sound || "Sparkle"
   );
-  const [name, setName] = useState(selectedCompartment?.name);
 
   useEffect(() => {
     setSelectedColor(selectedCompartment?.color);
@@ -38,8 +48,25 @@ export default function Settings({
     });
   }, [selectedSound]);
 
+  // Handle time picker
+  const [date, setDate] = useState(new Date());
+  const onDateChange = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    setDate(currentDate);
+  };
+
+  const [days, setDays] = useState({
+    Monday: false,
+    Tuesday: false,
+    Wednesday: false,
+    Thursday: false,
+    Friday: false,
+    Saturday: false,
+    Sunday: false,
+  });
+
   return (
-    <Stack space="$5" width={"100%"}>
+    <Stack space="$5" width={"100%"} height={"100%"} paddingVertical={"$12"}>
       <Stack space="$6" margin={45}>
         <Stack space="$6">
           <Stack
@@ -51,7 +78,7 @@ export default function Settings({
             <Feather name="arrow-left" size={30} color="black" />
           </Stack>
           <Stack space="$2">
-            <Text style={{ fontFamily: "Jost_400Regular", fontSize: 17 }}>
+            <Text style={{ fontFamily: "Jost_400Regular", fontSize: 20 }}>
               Compartment {selectedCompartment?.compartment}
             </Text>
             <Stack
@@ -67,7 +94,7 @@ export default function Settings({
           </Stack>
         </Stack>
         <Stack alignItems="center" width={"100%"}>
-          <Stack flexDirection="row" space="$5">
+          <Stack flexDirection="row" space="$7">
             <Stack
               borderBottomWidth={currentSettings === "color" && "2px"}
               paddingBottom="$2"
@@ -88,6 +115,17 @@ export default function Settings({
             >
               <Text style={{ fontFamily: "Jost_400Regular", fontSize: 20 }}>
                 Sound
+              </Text>
+            </Stack>
+            <Stack
+              borderBottomWidth={currentSettings === "schedule" && "2px"}
+              paddingBottom="$2"
+              onPress={() => {
+                setCurrentSettings("schedule");
+              }}
+            >
+              <Text style={{ fontFamily: "Jost_400Regular", fontSize: 20 }}>
+                Schedule
               </Text>
             </Stack>
           </Stack>
@@ -120,7 +158,7 @@ export default function Settings({
                   flexDirection="row"
                   space="$3"
                 >
-                  <Text style={{ fontFamily: "Jost_400Regular", fontSize: 17 }}>
+                  <Text style={{ fontFamily: "Jost_400Regular", fontSize: 20 }}>
                     HEX
                   </Text>
                   <Input
@@ -130,6 +168,7 @@ export default function Settings({
                     borderColor="black"
                     value={selectedColor}
                     onChangeText={setSelectedColor}
+                    fontSize={20}
                   />
                 </Stack>
               </Stack>
@@ -172,6 +211,75 @@ export default function Settings({
             </Stack>
           </>
         )}
+        {currentSettings === "schedule" && (
+          <>
+            <Stack marginHorizontal="$7" space="$5">
+              <XStack space="$5">
+                <Stack space="$5" alignItems="end" justifyContent="end">
+                  <Stack height={40}>
+                    <Text
+                      style={{ fontFamily: "Jost_400Regular", fontSize: 20 }}
+                      width="100%"
+                      textAlign="right"
+                    >
+                      TIME
+                    </Text>
+                  </Stack>
+                  <Text
+                    style={{ fontFamily: "Jost_400Regular", fontSize: 20 }}
+                    width="100%"
+                    textAlign="right"
+                  >
+                    DAY
+                  </Text>
+                </Stack>
+                <Stack space="$5" alignItems="start">
+                  <Stack height={40}>
+                    <DateTimePicker
+                      testID="dateTimePicker"
+                      value={date}
+                      mode={"time"}
+                      is24Hour={true}
+                      onChange={onDateChange}
+                    />
+                  </Stack>
+                  <Stack space="$2" marginLeft={"$2"}>
+                    {Object.keys(days).map((n, i) => {
+                      return (
+                        <Stack
+                          padding="$2"
+                          borderColor="black"
+                          borderWidth="2px"
+                          borderRadius={8}
+                          backgroundColor={
+                            days[n] ? selectedColor : "transparent"
+                          }
+                          onPress={() => {
+                            console.log(days);
+                            setDays({
+                              ...days,
+                              [n]: !days[n],
+                            });
+                          }}
+                          alignItems="center"
+                        >
+                          <Text
+                            style={{
+                              fontFamily: "Jost_400Regular",
+                              fontSize: 20,
+                            }}
+                          >
+                            {n}
+                          </Text>
+                        </Stack>
+                      );
+                    })}
+                  </Stack>
+                </Stack>
+              </XStack>
+            </Stack>
+          </>
+        )}
       </Stack>
     </Stack>
   );
@@ -203,7 +311,7 @@ const Sound = ({ name, icon, selectedSound, setSelectedSound }) => {
         borderBottomWidth={"1px"}
         paddingBottom="$4"
       >
-        <Text style={{ fontFamily: "Jost_400Regular", fontSize: 18 }}>
+        <Text style={{ fontFamily: "Jost_400Regular", fontSize: 20 }}>
           {name}
         </Text>
         {selectedSound === name && (
